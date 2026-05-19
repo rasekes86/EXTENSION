@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "BACKLOG MALDITO",
+  "description": "Guarda juegos, clasifícalos y crea contenido rápido.",
+  "version": "1.2.0",
+  "permissions": ["storage", "tabs", "activeTab", "scripting", "sidePanel"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "BACKLOG MALDITO"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

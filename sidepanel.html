@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BACKLOG MALDITO</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="brand">
+        <h1>BACKLOG MALDITO</h1>
+        <p>Tu radar oscuro de videojuegos pendientes</p>
+      </header>
+
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="radar" role="tab" aria-selected="true">Radar</button>
+        <button class="tab" data-tab="backlog" role="tab" aria-selected="false">Backlog</button>
+      </nav>
+
+      <section class="panel active" id="radar-panel" role="tabpanel">
+        <label>
+          Juego detectado
+          <input id="game-title" type="text" placeholder="Nombre del juego" />
+        </label>
+
+        <label>
+          URL detectada
+          <input id="game-url" type="url" placeholder="https://..." />
+        </label>
+
+        <label>
+          Estado
+          <select id="game-status"></select>
+        </label>
+
+        <fieldset>
+          <legend>Plataformas</legend>
+          <div id="platform-options" class="chips"></div>
+        </fieldset>
+
+        <label>
+          Interés
+          <input id="game-interest" type="range" min="1" max="5" value="4" />
+          <span id="interest-value">★★★★☆</span>
+        </label>
+
+        <label>
+          Nota rápida
+          <textarea id="game-note" rows="3" placeholder="Parece ideal para TikTok..."></textarea>
+        </label>
+
+        <div class="actions">
+          <button id="save-game" class="primary">Guardar en mi backlog</button>
+          <button id="generate-copy">Crear copy TikTok</button>
+          <button id="copy-text">Copiar texto</button>
+        </div>
+
+        <label>
+          Copy generado
+          <textarea id="generated-copy" rows="5" placeholder="Aquí aparecerá el copy..."></textarea>
+        </label>
+      </section>
+
+      <section class="panel" id="backlog-panel" role="tabpanel">
+        <label>
+          Buscar juego
+          <input id="search-input" type="search" placeholder="Silent Hill, Hades..." />
+        </label>
+
+        <label>
+          Filtrar por estado
+          <select id="filter-status"></select>
+        </label>
+
+        <ul id="backlog-list" class="backlog-list"></ul>
+      </section>
+
+      <footer class="footer">
+        <small>v1 — Tu backlog no está desordenado. Está maldito.</small>
+      </footer>
+    </main>
+
+    <script src="sidepanel.js" type="module"></script>
+  </body>
+</html>
