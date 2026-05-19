@@ -98,8 +98,61 @@ function switchTab(tabId) {
 async function detectCurrentTab() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab) return;
-  el.title.value = sanitizeTitle(tab.title || "");
+
+  const extracted = await extractGameDataFromPage(tab.id);
+  el.title.value = extracted.title || sanitizeTitle(tab.title || "");
   el.url.value = tab.url || "";
+
+  if (extracted.platforms.length) {
+    state.selectedPlatforms = new Set(extracted.platforms);
+    renderPlatforms();
+  }
+
+  if (extracted.note) {
+    el.note.value = extracted.note;
+  }
+}
+
+async function extractGameDataFromPage(tabId) {
+  try {
+    const [result] = await chrome.scripting.executeScript({
+      target: { tabId },
+      func: () => {
+        const fromMeta = document.querySelector('meta[property="og:title"]')?.content || "";
+        const h1 = document.querySelector("h1")?.textContent?.trim() || "";
+        const title = fromMeta || h1 || document.title || "";
+
+        const bodyText = document.body?.innerText?.slice(0, 6000) || "";
+        const lower = bodyText.toLowerCase();
+        const platformMap = [
+          ["ps5", "PS5"],
+          ["playstation 5", "PS5"],
+          ["xbox", "Xbox"],
+          ["switch 2", "Switch 2"],
+          ["nintendo switch", "Switch"],
+          ["switch", "Switch"],
+          ["steam deck", "Steam Deck"],
+          ["pc", "PC"],
+          ["windows", "PC"]
+        ];
+
+        const detectedPlatforms = platformMap
+          .filter(([needle]) => lower.includes(needle))
+          .map(([, platform]) => platform)
+          .filter((platform, index, self) => self.indexOf(platform) === index);
+
+        const demo = lower.includes("demo") || lower.includes("probar gratis") ? "Demo disponible detectada." : "";
+        return {
+          title: title.replace(/\s*\|.*$/, "").replace(/\s*-\s*Steam.*$/i, "").trim(),
+          platforms: detectedPlatforms,
+          note: demo
+        };
+      }
+    });
+    return result.result;
+  } catch {
+    return { title: "", platforms: [], note: "" };
+  }
 }
 
 function sanitizeTitle(title) {
