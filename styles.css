@@ -1,0 +1,83 @@
+:root {
+  --bg: #121212;
+  --panel: #1b1b1b;
+  --neon-purple: #a855f7;
+  --lime: #84cc16;
+  --arcade-yellow: #facc15;
+  --alert: #ef4444;
+  --ink: #f5f5f4;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  width: 420px;
+  background: repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(255, 255, 255, 0.02) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    var(--bg);
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.app { padding: 12px; }
+.brand h1 { margin: 0; color: var(--neon-purple); font-size: 1.2rem; }
+.brand p { margin: 0.2rem 0 1rem; font-size: 0.8rem; color: var(--lime); }
+
+.tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.tab {
+  border: 2px solid var(--neon-purple);
+  background: transparent;
+  color: var(--ink);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.tab.active { background: var(--neon-purple); }
+
+.panel { display: none; background: var(--panel); padding: 10px; border: 2px solid #333; }
+.panel.active { display: block; }
+
+label, fieldset { display: block; margin-bottom: 10px; font-size: 0.85rem; }
+input, select, textarea {
+  width: 100%;
+  margin-top: 4px;
+  border: 2px solid #333;
+  background: #101010;
+  color: var(--ink);
+  padding: 6px;
+}
+
+fieldset { border: 2px solid #333; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid #444;
+  padding: 4px 6px;
+  background: #0f0f0f;
+}
+
+.actions { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 10px; }
+button {
+  border: 2px solid var(--arcade-yellow);
+  background: #1a1a1a;
+  color: var(--ink);
+  padding: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+button.primary { border-color: var(--lime); background: #13220b; }
+button:hover { filter: brightness(1.2); }
+
+.backlog-list { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 8px; }
+.backlog-item { border: 2px solid #333; padding: 8px; background: #131313; }
+.backlog-item h3 { margin: 0 0 4px; color: var(--arcade-yellow); font-size: 0.95rem; }
+.backlog-item p { margin: 2px 0; font-size: 0.8rem; }
+.footer { margin-top: 8px; text-align: center; color: #bbb; }

@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "BACKLOG MALDITO",
+  "description": "Guarda juegos, clasifícalos y crea contenido rápido.",
+  "version": "1.0.0",
+  "permissions": ["storage", "tabs", "activeTab"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "BACKLOG MALDITO"
+  }
+}
