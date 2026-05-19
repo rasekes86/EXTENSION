@@ -81,3 +81,6 @@ button:hover { filter: brightness(1.2); }
 .backlog-item h3 { margin: 0 0 4px; color: var(--arcade-yellow); font-size: 0.95rem; }
 .backlog-item p { margin: 2px 0; font-size: 0.8rem; }
 .footer { margin-top: 8px; text-align: center; color: #bbb; }
+
+.row-actions { display:flex; gap:6px; margin-top:6px; }
+.row-actions button { flex:1; border-color:#555; }
